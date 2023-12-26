@@ -42,10 +42,8 @@ var mirador = Mirador.viewer({
   ]
 });
 
-
-// function to transform the text encoded in TEI with the xsl stylesheet "Frankenstein_text.xsl", this will apply the templates and output the text in the html <div id="text">
+// Function to transform the text encoded in TEI with the xsl stylesheet "Frankenstein_text.xsl"
 function documentLoader() {
-
     Promise.all([
       fetch(folio_xml).then(response => response.text()),
       fetch("Frankenstein_text.xsl").then(response => response.text())
@@ -66,11 +64,10 @@ function documentLoader() {
     .catch(function (error) {
       console.error("Error loading documents:", error);
     });
-  }
-  
-// function to transform the metadate encoded in teiHeader with the xsl stylesheet "Frankenstein_meta.xsl", this will apply the templates and output the text in the html <div id="stats">
-  function statsLoader() {
+}
 
+// Function to transform the metadata encoded in teiHeader with the xsl stylesheet "Frankenstein_meta.xsl"
+function statsLoader() {
     Promise.all([
       fetch(folio_xml).then(response => response.text()),
       fetch("Frankenstein_meta.xsl").then(response => response.text())
@@ -91,28 +88,34 @@ function documentLoader() {
     .catch(function (error) {
       console.error("Error loading documents:", error);
     });
-  }
+}
 
-  // Initial document load
-  documentLoader();
-  statsLoader();
-  // Event listener for sel1 change
-  function selectHand(event) {
-  var visible_mary = document.getElementsByClassName('#MWS');
-  var visible_percy = document.getElementsByClassName('#PBS');
-  // Convert the HTMLCollection to an array for forEach compatibility
-  var MaryArray = Array.from(visible_mary);
-  var PercyArray = Array.from(visible_percy);
-    if (event.target.value == 'both') {
-    //write an forEach() method that shows all the text written and modified by both hand (in black?). The forEach() method of Array instances executes a provided function once for each array element.
-     
-    } else if (event.target.value == 'Mary') {
-     //write an forEach() method that shows all the text written and modified by Mary in a different color (or highlight it) and the text by Percy in black. 
-     
+// Initial document load
+documentLoader();
+statsLoader();
+
+// Function to select and highlight text by Mary and Percy
+function selectHand(event) {
+    var visibleMary = document.getElementsByClassName('MWS');
+    var visiblePercy = document.getElementsByClassName('PBS');
+    var MaryArray = Array.from(visibleMary);
+    var PercyArray = Array.from(visiblePercy);
+
+    // Reset styles for both arrays
+    MaryArray.forEach(element => element.style.color = 'black');
+    PercyArray.forEach(element => element.style.color = 'black');
+
+    if (event.target.value === 'both') {
+        // Both hands in black (or default color)
+    } else if (event.target.value === 'Mary') {
+        // Mary's text in a different color
+        MaryArray.forEach(element => element.style.color = 'blue'; // Example color
     } else {
-     //write an forEach() method that shows all the text written and modified by Percy in a different color (or highlight it) and the text by Mary in black.
-    
+        // Percy's text in a different color
+        PercyArray.forEach(element => element.style.color = 'red'); // Example color
     }
-  }
-// write another function that will toggle the display of the deletions by clicking on a button
-// EXTRA: write a function that will display the text as a reading text by clicking on a button or another dropdown list, meaning that all the deletions are removed and that the additions are shown inline (not in superscript)
+}
+
+// Function to toggle the display of deletions
+function toggleDeletions() {
+    var deletions = document.getElementsByClassName('deletion');
