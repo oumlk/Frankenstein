@@ -40,6 +40,5 @@
         <hr/>
     </xsl:template>
     
-    <!-- Other templates for elements like tei:p, tei:lb, tei:hi etc. -->
     
 </xsl:stylesheet>
