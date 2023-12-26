@@ -109,7 +109,7 @@ function selectHand(event) {
         // Both hands in black (or default color)
     } else if (event.target.value === 'Mary') {
         // Mary's text in a different color
-        MaryArray.forEach(element => element.style.color = 'blue'; // Example color
+        MaryArray.forEach(element => element.style.color = 'blue'); // Example color
     } else {
         // Percy's text in a different color
         PercyArray.forEach(element => element.style.color = 'red'); // Example color
