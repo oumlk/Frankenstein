@@ -47,6 +47,7 @@
         <p><xsl:apply-templates/></p>
     </xsl:template>
 
+  
     <xsl:template match="tei:add[@place = 'marginleft']">
         <span class="marginAdd">
             <xsl:apply-templates/>
@@ -68,40 +69,27 @@
             <xsl:apply-templates/>
         </span>
     </xsl:template>
-
-    <!-- Temp for Line Breaks -->
+    
+    
+    <!-- add additional templates below, for example to transform the tei:lb in <br/> empty elements, tei:hi[@rend = 'sup'] in <sup> elements, the underlined text, additions with the attribute "overwritten" etc. -->
     <xsl:template match="tei:lb">
         <br/>
     </xsl:template>
-
-    <!-- Temp for Superscript Text -->
     <xsl:template match="tei:hi[@rend='sup']">
         <sup>
             <xsl:apply-templates/>
         </sup>
     </xsl:template>
-
-    <!-- Temp for Underlined Text -->
-    <xsl:template match="tei:hi[@rend='u']">
+    <xsl:template match="tei:hi[@rend='underline']">
         <u>
             <xsl:apply-templates/>
         </u>
     </xsl:template>
-
-    <!-- Temp for Circled Page Number -->
-    <xsl:template match="tei:pageNum">
-        <span class="circledPageNumber">
-            <xsl:apply-templates/>
-        </span>
-    </xsl:template>
-
-    <!-- Temp for Overwritten Text -->
     <xsl:template match="tei:add[@overwritten='yes']">
-        <span class="overwrittenText">
+        <span class="overwritten">
             <xsl:apply-templates/>
         </span>
     </xsl:template>
-
-   
     
-</xsl:stylesheet>
+</xsl:stylesheet> 
+
